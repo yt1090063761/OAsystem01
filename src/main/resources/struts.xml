@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<!--<constant name="struts.devMode" value="true"></constant>-->
+    <!--suppress InjectedReferences -->
+    <package name="oa" namespace="/" extends="json-default">
+        <!-- 首页-->
+        <action name="home_*" class="homeaction" method="{1}">
+            <result name="{1}">WEB-INF/jsp/{1}.jsp</result>
+        </action>
+        <!--用户模块 -->
+     <action name="user_*" class="useraction" method="{1}">
+         <result name="tc">WEB-INF/jsp/System_User/loginUI.html</result>
+         <result name="loginsuccess">WEB-INF/jsp/index.jsp</result>
+         <result name="quit">WEB-INF/jsp/System_User/logout.html</result>
+         <result name="{1}">WEB-INF/jsp/System_User/{1}.jsp</result>
+         <result name="savesuccess" type="redirectAction">user_list</result>
+         <result type="json" >
+             <param name="root">checkname</param>
+         </result>
+     </action>
+<!--岗位 -->
+        <action name="Role_*" class="roleaction" method="{1}">
+            <result name="{1}">WEB-INF/jsp/System_Role/{1}.jsp</result>
+            <result name="savesuccess"  type="redirectAction">Role_list</result>
+            <result name="updateSUCCESS" type="redirectAction">Role_list</result>
+        </action>
+        <action name="Dept_*" class="deptaction" method="{1}">
+              <result name="{1}">WEB-INF/jsp/System_Department/{1}.jsp</result>
+              <result name="{1}success" type="redirectAction">Dept_list</result>
+            <result  type="json">
+                <param name="root">jsonresult</param>
+            </result>
+
+          </action>
+    </package>
+</struts>

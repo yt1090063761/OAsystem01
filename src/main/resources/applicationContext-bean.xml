@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- dao -->
+
+    <bean id="prDao" class="cn.yt.oa.dao.impl.priDaoimpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="userdao" class="cn.yt.oa.dao.impl.userDaoimpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+
+    <bean id="roleDao" class="cn.yt.oa.dao.impl.roleDaoimpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+
+    <bean id="deptdao" class="cn.yt.oa.dao.impl.deptDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+    <!--action -->
+    <bean id="useraction" class="cn.yt.oa.action.userAction">
+        <property name="userdao" ref="userdao"></property>
+        <property name="prDao" ref="prDao"></property>
+    </bean>
+
+    <bean id="homeaction" class="cn.yt.oa.action.homeaction"></bean>
+
+    <bean id="roleaction" class="cn.yt.oa.action.roleaction">
+        <property name="roleDao" ref="roleDao"></property>
+    </bean>
+
+<bean id="deptaction" class="cn.yt.oa.action.deptaction">
+    <property name="deptDao" ref="deptdao"></property>
+</bean>
+</beans>
